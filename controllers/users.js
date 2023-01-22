@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-require(dotenv).config();
+require("dotenv").config();
 
 const Users = require("../models/users");
 const { SECRET_KEY } = process.env;
@@ -37,7 +37,14 @@ const loginUser = async (req, res) => {
   res.json({ user: candidate, token });
 };
 
-const logout = async (req, res) => {};
+const logoutUser = async (req, res) => {
+  await Users.findByIdAndUpdate(req.user._id, {token: null});
+  res.status(204).json();
+};
+
+const refreshUser = async (req, res) => {
+  res.send(req.user);
+};
 
 module.exports = {
   registerUser,

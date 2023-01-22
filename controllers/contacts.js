@@ -6,9 +6,9 @@ const getContacts = async (req, res) => {
 };
 
 const addContact = async (req, res) => {
-  const { name, number } = req.body;
-  const data = await Contacts.create({ name, number });
-  res.status(201).send(data);
+  const { name, number} = req.body;
+  const data = await Contacts.create({ name, number});
+  res.status(201).json(data);
 };
 
 const deleteContact = async (req, res) => {
